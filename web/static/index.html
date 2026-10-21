@@ -1,0 +1,20 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>GalaxyRVR Control</title>
+<style>body{background:#0b0f1a;color:#e6e9f0;font-family:sans-serif;margin:0}
+#app{display:flex;flex-direction:column;align-items:center;padding:2rem}
+button{background:#1c2333;color:#e6e9f0;border:1px solid #2b3450;padding:.6rem 1rem;margin:.2rem;border-radius:8px}
+#video{width:640px;max-width:100%;border-radius:12px;background:#000}
+</style></head><body><div id="app">
+<h1>GalaxyRVR Control Center</h1>
+<img id="video" src="http://'+location.hostname+':81/stream" alt="flux caméra">
+<div><button onclick="send('forward')">Avancer</button>
+<button onclick="send('backward')">Reculer</button>
+<button onclick="send('left')">Gauche</button>
+<button onclick="send('right')">Droite</button>
+<button onclick="send('stop')">Stop</button></div>
+<div><button onclick="send('mode_avoid')">Évitement</button>
+<button onclick="send('mode_follow')">Suivi</button>
+<button onclick="send('mode_manual')">Manuel</button></div>
+</div><script>
+const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws');
+function send(cmd){ws.send(JSON.stringify({type:'command',command:cmd}))}
+</script></body></html>

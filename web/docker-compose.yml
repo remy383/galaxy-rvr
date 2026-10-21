@@ -1,0 +1,9 @@
+services:
+  galaxyrvr-web:
+    build: .
+    ports:
+      - "${WEB_PORT:-8081}:8081"
+    environment:
+      - ROVER_IP=${ROVER_IP}
+      - ROVER_WS_PORT=${ROVER_WS_PORT:-8765}
+    restart: unless-stopped
