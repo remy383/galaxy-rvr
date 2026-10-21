@@ -4,12 +4,37 @@ Arduino UNO firmware for the GalaxyRVR robot car, works with the SunFounder Cont
 
 Current version: **2.0.3**
 
+- [What this project does](#what-this-project-does)
+- [Présentation (FR)](#présentation-fr)
 - [Dev Environment](#dev-environment)
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Firmware Flashing](#firmware-flashing)
 - [Docs](#docs)
 - [About SunFounder](#about-sunfounder)
+
+## What this project does
+
+GalaxyRVR is the firmware that runs the SunFounder GalaxyRVR, a Mars-rover style robot car. It runs on an Arduino UNO, drives the motors, and talks to an ESP32-CAM AI camera module that provides WiFi, a live video stream and a WebSocket link to your phone.
+
+What the robot can do:
+
+- **Remote control**: drive the car from the SunFounder Controller APP (or Robo Pilot / Mammoth Coding in v2) over WiFi, with live camera view.
+- **Obstacle avoidance**: the car steers around obstacles using the ultrasonic sensor and IR obstacle sensors.
+- **Obstacle following**: the car follows an object or hand placed in front of it.
+- **Lighting**: RGB LED strip with preset colors.
+- **Camera gimbal**: the camera pan/tilt servos are controlled by software PWM.
+- **Battery monitoring**: reads battery voltage and percentage.
+
+How it works: the main sketch runs a small state machine. `STATE_IDLE` waits for the APP to connect (LED blinks), then `STATE_APP` handles one of three modes: `MODE_APP_CONTROL`, `MODE_OBSTACLE_AVOIDANCE` or `MODE_OBSTACLE_FOLLOWING`. The APP sends control frames (motor, RGB, servo, front light, avoidance mode) over WebSocket.
+
+The repository also contains step-by-step tutorial sketches (`lesson_codes/`), Scratch projects (`scratch_codes/`) and a factory electrical test (`test/`).
+
+## Présentation (FR)
+
+GalaxyRVR est le firmware du robot SunFounder GalaxyRVR (rover de type Mars). Il tourne sur Arduino UNO, pilote les moteurs et communique avec le module caméra ESP32-CAM (WiFi, flux vidéo, WebSocket) pour être contrôlé depuis un smartphone.
+
+Fonctions : pilotage à distance via l'application SunFounder Controller, évitement d'obstacles (ultrasons + capteurs infrarouges), suivi d'objet, bandeau LED RGB, support caméra motorisé (servos) et mesure de la batterie. Le dépôt inclut aussi des exemples de cours, des projets Scratch et un test électrique.
 
 ## Dev Environment
 
@@ -93,6 +118,8 @@ The AI Camera module requires its own firmware. See [ai-camera-firmware](https:/
 ## Docs
 
 https://docs.sunfounder.com/projects/galaxy-rvr/en/latest/
+
+French docs: https://docs.sunfounder.com/projects/galaxy-rvr/fr/latest/
 
 ## About SunFounder
 
